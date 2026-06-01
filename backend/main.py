@@ -34,7 +34,7 @@ class GenerationRequest(BaseModel):
 async def generate_terrain(req: GenerationRequest):
     try:
         raw_terrain = TerrainDiffusionPipeline.generate(steps=req.steps, seed=req.seed, size=req.size)
-        height_matrix = raw_terrain.tolist() if hasattr(raw_terrain, 'tolist') else raw_terrain
+        height_matrix = raw_terrain.tolist() if hasattr(raw_terrain, "tolist") else raw_terrain
         return {"success": True, "size": req.size, "data": height_matrix}
     except Exception as e:
         raise HTTPException(status_code=500, detail=str(e))
